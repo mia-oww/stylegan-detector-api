@@ -33,9 +33,12 @@ Current Progress:
  
  -Preparing web integration to enable real-time image authenticity classification
  
- 
+Due to the heavy files being used to train the models for this API, not all parts will be documented. As of now, this repository will be updated manually.   
+
 
 Original Project Background:
 
 The original StyleGAN Detector was designed to detect StyleGAN-generated images using co-occurrence matrices and a neural network classifier. The training and testing scripts were dependent on large datasets and a tightly coupled codebase, which limited scalability and maintainability.
 
+
+All credits for the original training scrips go to ksmolko.
