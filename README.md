@@ -1,4 +1,5 @@
 📦 StyleGAN Detector Revamp (In Progress)
+
 📖 Overview
 This project is a modernization of a legacy StyleGAN image detection system originally built to classify whether an image of a human face was generated using StyleGAN or not. I am currently refactoring the original source code into a modular, scalable API and preparing it for integration with a web interface. This is specifically for the API, web-development will be in a seperate Repo.
 
