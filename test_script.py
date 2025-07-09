@@ -6,7 +6,6 @@ from keras import layers, models
 from skimage.feature import greycomatrix
 
 def getCoMatrices(img):
-    # Extract gray-level co-occurrence matrices from R, G, B channels
     b, g, r = cv2.split(img)
     distance = 1
     angle = 0
