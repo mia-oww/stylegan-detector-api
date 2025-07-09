@@ -1,12 +1,13 @@
 StyleGAN Detector Revamp (Currently In Progress)
 
-📖 Overview
+Overview:
+
 This project is a modernization of a legacy StyleGAN image detection system originally built to classify whether an image of a human face was generated using StyleGAN or not. I am currently refactoring the original source code into a modular, scalable API and preparing it for integration with a web interface. This is specifically for the API, web-development will be in a seperate Repo.
 
 Link to original project: https://github.com/ksmolko/stylegan-detector/tree/main?tab=readme-ov-file
 
 
-🛠️ Technologies
+Technologies:
 Python 3.8.6
 TensorFlow 2.3.0
 Keras 2.4.3
