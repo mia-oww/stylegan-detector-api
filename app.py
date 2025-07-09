@@ -7,7 +7,6 @@ from skimage.feature import graycomatrix
 
 app = Flask(__name__)
 
-
 png_model = tf.keras.models.load_model('models/png_model/ImageDetectmodel.h5')
 jpg_model = tf.keras.models.load_model('models/jpg_model/ImageDetectmodel.h5')
 
