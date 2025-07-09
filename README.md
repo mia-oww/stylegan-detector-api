@@ -6,6 +6,12 @@ This repository documents the refactorization of a legacy StyleGAN image detecti
 
 Link to original project: https://github.com/ksmolko/stylegan-detector/tree/main?tab=readme-ov-file
 
+Datasets being used to train models:
+
+Fake Images: https://drive.google.com/drive/folders/1-5HnXJuN1ofCrCSbbVSH3NnP62BZTh4s 
+
+Real Images: https://drive.google.com/drive/folders/1tZUcXDBeOibC6jcMCtgRRz67pzrAHeHL
+
 
 Technologies:
 Python 3.8.6
