@@ -4,7 +4,7 @@ Overview:
 
 This repository documents the refactorization of a legacy StyleGAN image detection system that was initially developed to determine whether a given image of a human face was generated using StyleGAN or a real image. The core detection mechanism relies on neural networks implemented in Python, which analyze facial images to effectively differentiate between AI-generated and authentic human faces. Currently, the original source code is undergoing a careful refactoring process to transform it into a scalable API architecture that can support future expansion and integration, specifically within the DetectAI Front-end. At this time, the neural networks powering the detection system are actively being trained and optimized to improve their accuracy and reliability. This repository is dedicated exclusively to the development of the API layer, while the web interface responsible for user interaction and experience is being developed in a separate repository. Once the API is fully operational and the models are sufficiently trained, the frontend web interface will be integrated to provide a seamless and efficient user-facing platform for AI image detection.
 
-Link to original project: https://github.com/ksmolko/stylegan-detector/tree/main?tab=readme-ov-file
+Original untrained neural network: https://github.com/ksmolko/stylegan-detector/tree/main?tab=readme-ov-file
 
 Datasets being used to train models:
 
