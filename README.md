@@ -1,8 +1,8 @@
-StyleGAN Detector Revamp (Currently In Progress)
+StyleGAN Detector Revamp (Work in progress)
 
 Overview:
 
-This project is a modernization of a legacy StyleGAN image detection system originally built to classify whether an image of a human face was generated using StyleGAN or not. I am currently refactoring the original source code into a modular, scalable API and preparing it for integration with a web interface. This is specifically for the API, web-development will be in a seperate Repo.
+This project documents the refactorization of a legacy StyleGAN image detection system that was initially developed to determine whether a given image of a human face was generated using StyleGAN technology or a real image. The core detection mechanism relies on neural networks implemented in Python, which analyze facial images to effectively differentiate between AI-generated and authentic human faces. Currently, the original source code is undergoing a careful refactoring process to transform it into a modular and scalable API architecture that can support future expansion and integration. At this time, the neural networks powering the detection system are actively being trained and optimized to improve their accuracy and reliability. This repository is dedicated exclusively to the development of the API layer, while the web interface responsible for user interaction and experience is being developed in a separate repository. Once the API is fully operational and the models are sufficiently trained, the frontend web interface will be integrated to provide a seamless and efficient user-facing platform for AI image detection.
 
 Link to original project: https://github.com/ksmolko/stylegan-detector/tree/main?tab=readme-ov-file
 
