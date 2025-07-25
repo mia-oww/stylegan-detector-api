@@ -7,8 +7,8 @@ from matplotlib import pyplot as plt
 from skimage.feature import greycomatrix 
 from keras import layers, models
 from keras.optimizers import Adam
+from keras.callbacks import EarlyStopping
 
-os.makedirs('models/png_model', exist_ok=True)  # Ensure folder exists before saving
 
 ###### Helper functions ######
 
@@ -122,29 +122,29 @@ def trainModel():
                   metrics=['accuracy'])
     return model
 
-def plotAccuracy(model, train_matrices, train_labels, test_matrices, test_labels):
-    data = model.fit(train_matrices, train_labels, epochs=50, 
-                      validation_data=(test_matrices, test_labels))
+# def plotAccuracy(model, train_matrices, train_labels, test_matrices, test_labels):
+#     data = model.fit(train_matrices, train_labels, epochs=5, batch_size=16, 
+#                       validation_data=(test_matrices, test_labels))
     
-    plt.plot(data.history['loss'])
-    plt.plot(data.history['val_loss'])
-    plt.title('Model Loss')
-    plt.ylabel('Loss')
-    plt.ylim([0, 1])
-    plt.xlabel('Epoch')
-    plt.legend(['train loss', 'val loss'], loc='upper left')
-    plt.show()
+#     plt.plot(data.history['loss'])
+#     plt.plot(data.history['val_loss'])
+#     plt.title('Model Loss')
+#     plt.ylabel('Loss')
+#     plt.ylim([0, 1])
+#     plt.xlabel('Epoch')
+#     plt.legend(['train loss', 'val loss'], loc='upper left')
+#     plt.show()
 
-    plt.plot(data.history['accuracy'], label='accuracy')
-    plt.plot(data.history['val_accuracy'], label='val_accuracy')
-    plt.title('Model Accuracy')
-    plt.xlabel('Epoch')
-    plt.ylabel('Accuracy')
-    plt.ylim([0.5, 1])
-    plt.legend(loc='lower right')
-    test_loss, test_acc = model.evaluate(test_matrices,  test_labels, verbose=2)
-    plt.show()
-    print('Accuracy is ' + str(test_acc * 100) + '%')
+#     plt.plot(data.history['accuracy'], label='accuracy')
+#     plt.plot(data.history['val_accuracy'], label='val_accuracy')
+#     plt.title('Model Accuracy')
+#     plt.xlabel('Epoch')
+#     plt.ylabel('Accuracy')
+#     plt.ylim([0.5, 1])
+#     plt.legend(loc='lower right')
+#     test_loss, test_acc = model.evaluate(test_matrices,  test_labels, verbose=2)
+#     plt.show()
+#     print('Accuracy is ' + str(test_acc * 100) + '%')
 
 ###### Main Script ######
 
@@ -152,15 +152,61 @@ if len(sys.argv) != 3:
     print("Usage: train_png_model.py [fake img directory] [real img directory]")
     sys.exit()
 
-# Generate dataset from imagestds, tlbl, vds, vlbl = genDs(sys.argv[1], sys.argv[2])
+# Generate dataset from images
+tds, tlbl, vds, vlbl = genDs(sys.argv[1], sys.argv[2])
 
-
+# Train the model
 modelCNN = trainModel()
 modelCNN.summary()
-plotAccuracy(modelCNN, tds, tlbl, vds, vlbl)
+#plotAccuracy(modelCNN, tds, tlbl, vds, vlbl)
+
+# early stopping 
+early_stop = EarlyStopping(
+    monitor='val_loss',         
+    patience=5,
+    restore_best_weights=True
+)
+
+# Train with early stopping
+history = modelCNN.fit(
+    tds, tlbl,
+    validation_data=(vds, vlbl),
+    epochs=5, # EPOCH 
+    batch_size=16, # BATCH SIZE
+    callbacks=[early_stop]
+)
+
+# Plot after training
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('Model Loss')
+plt.ylabel('Loss')
+plt.ylim([0, 1])
+plt.xlabel('Epoch')
+plt.legend(['train loss', 'val loss'], loc='upper left')
+plt.show()
+
+plt.plot(history.history['accuracy'], label='accuracy')
+plt.plot(history.history['val_accuracy'], label='val_accuracy')
+plt.title('Model Accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.ylim([0.5, 1])
+plt.legend(loc='lower right')
+test_loss, test_acc = modelCNN.evaluate(vds, vlbl, verbose=2)
+plt.show()
+print('Accuracy is ' + str(test_acc * 100) + '%')
+
+# Save model after training
+save_dir = 'models/png_model'
+os.makedirs(save_dir, exist_ok=True)
+save_path = os.path.join(save_dir, 'ImageDetectmodel.h5')
+modelCNN.save_weights(os.path.join(save_dir, 'ImageDetectmodel_weights.h5'))
+modelCNN.save(save_path)
+
+print("Saving model to:", os.path.abspath(save_path))
+print("Model saving completed.")
+print("Files in models/png_model:", os.listdir(save_dir))
 
 
-modelCNN.save_weights('models/png_model/ImageDetectmodel_weights.h5')
-modelCNN.save('models/png_model/ImageDetectmodel.h5')
 
-print("Model saved successfully.")
